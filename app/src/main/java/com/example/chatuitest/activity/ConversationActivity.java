@@ -66,6 +66,9 @@ public class ConversationActivity extends BaseActivity implements KeyboardAwareL
      */
     private void setupConversation(Conversation conversation) {
 
+
+//        inputPanel.setupConversation(null, conversation);
+
     }
 
     private void initView() {

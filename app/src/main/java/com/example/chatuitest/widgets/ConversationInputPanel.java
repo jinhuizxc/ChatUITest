@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +16,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.example.chatuitest.R;
-import com.example.chatuitest.activity.ConversationActivity;
 import com.example.chatuitest.model.Conversation;
+import com.example.chatuitest.widgets.extension.ConversationExtension;
 import com.lqr.emoji.EmotionLayout;
 import com.lqr.emoji.IEmotionExtClickListener;
 import com.lqr.emoji.IEmotionSelectedListener;
@@ -49,11 +49,11 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
     Button sendButton;
 
     @BindView(R.id.emotionContainerFrameLayout)
-    KeyboardHeightFrameLayout emotionContainerFrameLayout;
+    com.example.chatuitest.widgets.KeyboardHeightFrameLayout emotionContainerFrameLayout;
     @BindView(R.id.emotionLayout)
     EmotionLayout emotionLayout;
     @BindView(R.id.extContainerContainerLayout)
-    KeyboardHeightFrameLayout extContainerFrameLayout;
+    com.example.chatuitest.widgets.KeyboardHeightFrameLayout extContainerFrameLayout;
 
     @BindView(R.id.inputPanelFrameLayout)
     FrameLayout inputContainerFrameLayout;
@@ -61,9 +61,11 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
     ViewPager extViewPager;
 
     private Conversation conversation;
-    private InputAwareLayout rootLinearLayout;
+    private com.example.chatuitest.widgets.InputAwareLayout rootLinearLayout;
 
     private FragmentActivity activity;
+    ConversationExtension extension;
+
 
     private OnConversationInputPanelStateChangeListener onConversationInputPanelStateChangeListener;
 
@@ -95,13 +97,13 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
 
     }
 
-    public void init(final FragmentActivity activity, InputAwareLayout rootInputAwareLayout) {
+    public void init(final FragmentActivity activity, com.example.chatuitest.widgets.InputAwareLayout rootInputAwareLayout) {
         LayoutInflater.from(getContext()).inflate(R.layout.conversation_input_panel, this, true);
         ButterKnife.bind(this, this);
         this.activity = activity;
         this.rootLinearLayout = rootInputAwareLayout;
 
-//        this.extension = new ConversationExtension(activity, this, extViewPager);
+        this.extension = new ConversationExtension(activity, this, extViewPager);
 
         // 设置emoj
         emotionLayout.attachEditText(editText);
@@ -125,13 +127,23 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
     // 添加按钮
     @OnClick(R.id.extImageView)
     void onExtImageViewClick() {
-
+        if (rootLinearLayout.getInputView() == extContainerFrameLayout) {
+            hideConversationExtension();
+        } else {
+            emotionImageView.setImageResource(R.mipmap.ic_cheat_emo);
+            showConversationExtension();
+        }
     }
 
     // 表情按钮
     @OnClick(R.id.emotionImageView)
     void onEmotionImageViewClick() {
-
+        if (rootLinearLayout.getInputView() == emotionContainerFrameLayout) {
+            hideEmotionLayout();
+        } else {
+            hideAudioButton();
+            showEmotionLayout();
+        }
     }
 
     // editText
@@ -145,9 +157,19 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
 
     }
 
+    // 语音
     @OnClick(R.id.audioImageView)
     public void showRecordPanel() {
-
+        if (audioButton.isShown()) {
+            hideAudioButton();
+            editText.requestFocus();
+            rootLinearLayout.showSoftkey(editText);
+        } else {
+            editText.clearFocus();
+            showAudioButton();
+            hideEmotionLayout();
+            hideConversationExtension();
+        }
     }
 
     /**
@@ -156,6 +178,53 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
     @OnClick(R.id.sendButton)
     void sendMessage() {
 
+    }
+
+    private void showAudioButton() {
+        audioButton.setVisibility(View.VISIBLE);
+        editText.setVisibility(View.GONE);
+        sendButton.setVisibility(View.GONE);
+        audioImageView.setImageResource(R.mipmap.ic_cheat_keyboard);
+        rootLinearLayout.hideCurrentInput(editText);
+        rootLinearLayout.hideAttachedInput(true);
+    }
+
+    private void hideAudioButton() {
+        audioButton.setVisibility(View.GONE);
+        editText.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(editText.getText())) {
+            sendButton.setVisibility(View.GONE);
+        } else {
+            sendButton.setVisibility(View.VISIBLE);
+        }
+        rootLinearLayout.show(editText, emotionContainerFrameLayout);
+        audioImageView.setImageResource(R.mipmap.ic_cheat_voice);
+    }
+
+
+    private void hideConversationExtension() {
+        rootLinearLayout.showSoftkey(editText);
+        if (onConversationInputPanelStateChangeListener != null) {
+            onConversationInputPanelStateChangeListener.onInputPanelCollapsed();
+        }
+    }
+
+    private void showConversationExtension() {
+        rootLinearLayout.show(editText, extContainerFrameLayout);
+        if (audioButton.isShown()) {
+            hideAudioButton();
+        }
+        if (onConversationInputPanelStateChangeListener != null) {
+            onConversationInputPanelStateChangeListener.onInputPanelExpanded();
+        }
+    }
+
+    private void showEmotionLayout() {
+        audioButton.setVisibility(View.GONE);
+        emotionImageView.setImageResource(R.mipmap.ic_cheat_keyboard);
+        if (onConversationInputPanelStateChangeListener != null) {
+            onConversationInputPanelStateChangeListener.onInputPanelExpanded();
+        }
     }
 
     public void onKeyBoardShow() {
@@ -176,6 +245,21 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
 
     public void onKeyboardHidden() {
         // do nothing
+    }
+
+//    public void setupConversation(ConversationViewModel conversationViewModel, Conversation conversation) {
+//        this.conversationViewModel = conversationViewModel;
+//        this.conversation = conversation;
+//        this.extension.bind(conversationViewModel, conversation);
+//
+//        setDraft();
+//    }
+
+    public void setupConversation(Conversation conversation) {
+        this.conversation = conversation;
+        this.extension.bind(conversation);
+
+//        setDraft();
     }
 
 

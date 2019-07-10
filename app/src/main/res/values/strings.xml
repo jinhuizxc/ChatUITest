@@ -12,4 +12,11 @@
     <string name="voice_short">录音时间太短</string>
     <string name="send">发送</string>
 
+
+    <string name="album">相册</string>
+    <string name="shooting">拍摄</string>
+    <string name="video_call">视频通话</string>
+    <string name="voice_input">语音输入</string>
+    <string name="business_card">名片</string>
+
 </resources>
