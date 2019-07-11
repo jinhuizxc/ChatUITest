@@ -1,13 +1,13 @@
-package com.example.chatuitest.fragment;
+package com.example.chatuitest.chatui.fragment;
 
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.chatuitest.R;
-import com.example.chatuitest.activity.ConversationActivity;
+import com.example.chatuitest.chatui.activity.ConversationActivity;
 import com.example.chatuitest.base.BaseFragment;
-import com.example.chatuitest.model.Conversation;
+import com.example.chatuitest.chatui.model.Conversation;
 
 import butterknife.BindView;
 import butterknife.OnClick;

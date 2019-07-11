@@ -49,11 +49,11 @@
 
             <!-- 更多入口 -->
             <ImageView
-                android:id="@+id/add_btn"
+                android:id="@+id/iv_voice"
                 android:layout_width="@dimen/dp_35"
                 android:layout_height="@dimen/dp_35"
                 android:layout_marginRight="@dimen/dp_10"
-                android:src="@drawable/icon_add" />
+                android:src="@mipmap/ic_cheat_voice" />
 
             <!-- 输入入口 -->
             <EditText
@@ -87,6 +87,14 @@
                     android:layout_marginEnd="@dimen/dp_10"
                     android:layout_marginRight="@dimen/dp_10"
                     android:src="@drawable/selector_emotion_btn" />
+
+                <!-- 更多入口 -->
+                <ImageView
+                    android:id="@+id/add_btn"
+                    android:layout_width="@dimen/dp_35"
+                    android:layout_height="@dimen/dp_35"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:src="@drawable/icon_add" />
 
                 <TextView
                     android:id="@+id/send"

@@ -1,4 +1,4 @@
-package com.example.chatuitest.model;
+package com.example.chatuitest.chatui.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

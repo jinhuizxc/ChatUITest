@@ -1,4 +1,4 @@
-package com.example.chatuitest.activity;
+package com.example.chatuitest.chatui.activity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -7,10 +7,10 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.chatuitest.R;
 import com.example.chatuitest.base.BaseActivity;
-import com.example.chatuitest.model.Conversation;
-import com.example.chatuitest.widgets.ConversationInputPanel;
-import com.example.chatuitest.widgets.InputAwareLayout;
-import com.example.chatuitest.widgets.KeyboardAwareLinearLayout;
+import com.example.chatuitest.chatui.widgets.ConversationInputPanel;
+import com.example.chatuitest.chatui.model.Conversation;
+import com.example.chatuitest.chatui.widgets.InputAwareLayout;
+import com.example.chatuitest.chatui.widgets.KeyboardAwareLinearLayout;
 
 import butterknife.BindView;
 
@@ -67,7 +67,7 @@ public class ConversationActivity extends BaseActivity implements KeyboardAwareL
     private void setupConversation(Conversation conversation) {
 
 
-//        inputPanel.setupConversation(null, conversation);
+        inputPanel.setupConversation(conversation);
 
     }
 

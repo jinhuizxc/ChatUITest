@@ -5,13 +5,16 @@ import android.widget.Button;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.example.chatuitest.R;
-import com.example.chatuitest.activity.ChatRoomListActivity;
 import com.example.chatuitest.base.BaseActivity;
+import com.example.chatuitest.chatui.activity.ChatRoomListActivity;
 import com.example.chatuitest.way2.SampleActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 今天把这块走通，比较2种实现方式，进行项目适配， 改善问题;
+ */
 public class TestActivity extends BaseActivity {
 
     @BindView(R.id.bt_way1)

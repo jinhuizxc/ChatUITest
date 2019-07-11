@@ -1,4 +1,4 @@
-package com.example.chatuitest.widgets;
+package com.example.chatuitest.chatui.widgets;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -17,8 +17,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.chatuitest.R;
-import com.example.chatuitest.model.Conversation;
-import com.example.chatuitest.widgets.extension.ConversationExtension;
+import com.example.chatuitest.chatui.extension.ConversationExtension;
+import com.example.chatuitest.chatui.model.Conversation;
 import com.lqr.emoji.EmotionLayout;
 import com.lqr.emoji.IEmotionExtClickListener;
 import com.lqr.emoji.IEmotionSelectedListener;
@@ -49,11 +49,11 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
     Button sendButton;
 
     @BindView(R.id.emotionContainerFrameLayout)
-    com.example.chatuitest.widgets.KeyboardHeightFrameLayout emotionContainerFrameLayout;
+    KeyboardHeightFrameLayout emotionContainerFrameLayout;
     @BindView(R.id.emotionLayout)
     EmotionLayout emotionLayout;
     @BindView(R.id.extContainerContainerLayout)
-    com.example.chatuitest.widgets.KeyboardHeightFrameLayout extContainerFrameLayout;
+    KeyboardHeightFrameLayout extContainerFrameLayout;
 
     @BindView(R.id.inputPanelFrameLayout)
     FrameLayout inputContainerFrameLayout;
@@ -61,7 +61,7 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
     ViewPager extViewPager;
 
     private Conversation conversation;
-    private com.example.chatuitest.widgets.InputAwareLayout rootLinearLayout;
+    private InputAwareLayout rootLinearLayout;
 
     private FragmentActivity activity;
     ConversationExtension extension;
@@ -72,7 +72,6 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
     public void setOnConversationInputPanelStateChangeListener(OnConversationInputPanelStateChangeListener onConversationInputPanelStateChangeListener) {
         this.onConversationInputPanelStateChangeListener = onConversationInputPanelStateChangeListener;
     }
-
 
 
     public ConversationInputPanel(@NonNull Context context) {
@@ -97,7 +96,7 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
 
     }
 
-    public void init(final FragmentActivity activity, com.example.chatuitest.widgets.InputAwareLayout rootInputAwareLayout) {
+    public void init(final FragmentActivity activity, InputAwareLayout rootInputAwareLayout) {
         LayoutInflater.from(getContext()).inflate(R.layout.conversation_input_panel, this, true);
         ButterKnife.bind(this, this);
         this.activity = activity;
@@ -259,7 +258,6 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
         this.conversation = conversation;
         this.extension.bind(conversation);
 
-//        setDraft();
     }
 
 

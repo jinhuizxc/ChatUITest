@@ -1,8 +1,8 @@
-package com.example.chatuitest.activity;
+package com.example.chatuitest.chatui.activity;
 
 import com.example.chatuitest.R;
 import com.example.chatuitest.base.BaseActivity;
-import com.example.chatuitest.fragment.ChatRoomListFragment;
+import com.example.chatuitest.chatui.fragment.ChatRoomListFragment;
 
 public class ChatRoomListActivity extends BaseActivity {
 

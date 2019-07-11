@@ -1,4 +1,4 @@
-package com.example.chatuitest.widgets;
+package com.example.chatuitest.chatui.widgets;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.view.Surface;
 import android.view.View;
 
 import com.example.chatuitest.R;
-import com.example.chatuitest.utils.ServiceUtil;
+import com.example.chatuitest.chatui.utils.ServiceUtil;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;

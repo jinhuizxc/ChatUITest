@@ -28,9 +28,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.ConversationActivity"/>
+        <activity android:name=".chatui.activity.ConversationActivity"/>
 
-        <activity android:name=".activity.ChatRoomListActivity"/>
+        <activity android:name=".chatui.activity.ChatRoomListActivity"/>
 
         <activity android:name=".way2.SampleActivity"/>
 

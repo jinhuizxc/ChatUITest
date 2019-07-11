@@ -1,4 +1,4 @@
-package com.example.chatuitest.utils;
+package com.example.chatuitest.chatui.utils;
 
 import android.app.Activity;
 import android.app.AlarmManager;

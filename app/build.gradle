@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -33,5 +37,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.blankj:utilcode:1.22.10'
     api project(':panel')
-//    implementation 'com.effective.android:panelSwitchHelper:1.0.0'
+    //    implementation 'com.effective.android:panelSwitchHelper:1.0.0'
+    // material-dialogs
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
 }

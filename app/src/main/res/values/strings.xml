@@ -18,5 +18,6 @@
     <string name="video_call">视频通话</string>
     <string name="voice_input">语音输入</string>
     <string name="business_card">名片</string>
+    <string name="video">视频</string>
 
 </resources>

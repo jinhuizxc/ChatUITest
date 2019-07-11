@@ -1,4 +1,4 @@
-package com.example.chatuitest.widgets;
+package com.example.chatuitest.chatui.widgets;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
